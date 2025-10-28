@@ -9,7 +9,7 @@
  * Smart filtering preserves other Link headers (preload, DNS-prefetch, etc.)
  * 
  * @author      Torwald45
- * @link        https://github.com/Torwald45/wp-snippet-disable-shortlinks-seo
+ * @link        https://github.com/Torwald45/wp-snippet-disable-shortlinks
  * @license     GPL-2.0-or-later
  * @version     1.0.0
  */

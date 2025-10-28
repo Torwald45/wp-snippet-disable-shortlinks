@@ -14,12 +14,18 @@ Completely removes WordPress shortlinks from all output locations while preservi
 
 ## Why Disable Shortlinks?
 
-WordPress shortlinks (e.g., `?p=123`) are rarely used and add unnecessary bloat to your HTML and HTTP headers. Most modern SEO strategies rely on clean, descriptive URLs. Removing shortlinks:
+WordPress shortlinks (e.g., `?p=123`) are enabled by default but rarely used. They add:
+- Unnecessary HTML meta tags
+- Extra HTTP headers
+- **Exposed endpoint** - WordPress exposes shortlink functionality to the world (unlike static generators like Astro)
+- Additional attack surface
+- Bloat in your site's output
+
+Removing shortlinks:
 - Reduces HTML size
 - Cleans up HTTP headers
-- Improves SEO by removing duplicate URL references
+- Removes unnecessary endpoint
 - Simplifies your site's URL structure
-
 ## Requirements
 
 - WordPress 5.0 or higher
@@ -30,7 +36,7 @@ WordPress shortlinks (e.g., `?p=123`) are rarely used and add unnecessary bloat 
 ### Method 1: functions.php
 
 1. Open your theme's `functions.php` file
-2. Copy the entire content from `disable-shortlinks-seo.php`
+2. Copy the entire content from `disable-shortlinks.php`
 3. Paste at the end of your `functions.php`
 4. Save the file
 
@@ -38,7 +44,7 @@ WordPress shortlinks (e.g., `?p=123`) are rarely used and add unnecessary bloat 
 
 1. Install and activate the [Code Snippets](https://wordpress.org/plugins/code-snippets/) plugin
 2. Go to Snippets → Add New
-3. Copy content from `disable-shortlinks-seo.php` **WITHOUT the opening `<?php` tag**
+3. Copy content from `disable-shortlinks.php` **WITHOUT the opening `<?php` tag**
 4. Paste into the Code field
 5. Activate the snippet
 
@@ -120,4 +126,4 @@ GPL v2 or later
 
 ## Support
 
-For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/Torwald45/wp-snippet-disable-shortlinks-seo).
+For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/Torwald45/wp-snippet-disable-shortlinks).
