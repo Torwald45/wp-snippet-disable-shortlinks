@@ -1,0 +1,123 @@
+# WP Snippet: Disable WordPress Shortlinks Everywhere
+
+Completely removes WordPress shortlinks from all output locations while preserving other HTTP Link headers.
+
+## Features
+
+- **Removes `<link rel="shortlink">` from HTML head** - Cleans up unnecessary meta tags
+- **Removes HTTP `Link:` header with shortlink** - Eliminates shortlink from server response headers
+- **Disables `get_shortlink()` and `pre_get_shortlink` functions** - Prevents shortlink generation in WordPress API
+- **Smart filtering** - Preserves other Link headers like preload, DNS-prefetch, or preconnect
+- **Zero configuration** - Works immediately after installation
+- **Lightweight** - No database queries, no settings panel, pure PHP filters
+- **Unique prefixes** - Uses `torwald45_shortlink_` namespace to prevent conflicts
+
+## Why Disable Shortlinks?
+
+WordPress shortlinks (e.g., `?p=123`) are rarely used and add unnecessary bloat to your HTML and HTTP headers. Most modern SEO strategies rely on clean, descriptive URLs. Removing shortlinks:
+- Reduces HTML size
+- Cleans up HTTP headers
+- Improves SEO by removing duplicate URL references
+- Simplifies your site's URL structure
+
+## Requirements
+
+- WordPress 5.0 or higher
+- PHP 7.4 or higher
+
+## Installation
+
+### Method 1: functions.php
+
+1. Open your theme's `functions.php` file
+2. Copy the entire content from `disable-shortlinks-seo.php`
+3. Paste at the end of your `functions.php`
+4. Save the file
+
+### Method 2: Code Snippets Plugin
+
+1. Install and activate the [Code Snippets](https://wordpress.org/plugins/code-snippets/) plugin
+2. Go to Snippets → Add New
+3. Copy content from `disable-shortlinks-seo.php` **WITHOUT the opening `<?php` tag**
+4. Paste into the Code field
+5. Activate the snippet
+
+## Usage
+
+No configuration needed. Once installed, the snippet automatically:
+1. Removes shortlinks from all pages
+2. Blocks shortlink generation
+3. Preserves other important Link headers
+
+### Verification
+
+Check if shortlinks are removed:
+
+**1. View page source (Ctrl+U):**
+```html
+<!-- BEFORE: -->
+<link rel='shortlink' href='https://example.com/?p=123' />
+
+<!-- AFTER: -->
+(link removed)
+```
+
+**2. Check HTTP headers:**
+```bash
+curl -I https://example.com/sample-page/
+
+# BEFORE:
+# Link: <https://example.com/?p=123>; rel=shortlink
+
+# AFTER:
+(header removed or shortlink entry removed)
+```
+
+## Technical Details
+
+### WordPress Hooks Used
+- `init` (priority 0) - Removes shortlink actions early
+- `pre_get_shortlink` (priority 999) - Prevents shortlink generation
+- `get_shortlink` (priority 999) - Returns empty string
+- `wp_headers` (priority 999) - Filters HTTP Link header
+
+### Actions Removed
+- `wp_shortlink_wp_head` - Shortlink in HTML head
+- `wp_shortlink_header` - Shortlink in HTTP headers
+
+### Smart Filtering Logic
+The snippet uses intelligent filtering on `wp_headers` to:
+- Parse comma-separated Link header entries
+- Remove only `rel=shortlink` entries
+- Preserve other Link headers (preload, DNS-prefetch, preconnect)
+- Remove entire Link header only if empty after filtering
+
+## Compatibility
+
+Tested with:
+- WordPress 5.0 - 6.7+
+- PHP 7.4 - 8.3
+- Classic themes and block themes
+
+**Known to work with:**
+- Standard WordPress installations
+- Multisite networks
+- Custom post types
+
+**Potential conflicts:** None known. Uses high priority (999) to ensure execution after other plugins.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.
+
+## License
+
+GPL v2 or later
+
+## Author
+
+[Torwald45](https://github.com/Torwald45)
+
+## Support
+
+For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/Torwald45/wp-snippet-disable-shortlinks-seo).
