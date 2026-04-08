@@ -1,8 +1,8 @@
 <?php
 /**
- * WP Snippet: Disable WordPress Shortlinks Everywhere
+ * WP Snippet: Disable WP Shortlinks Everywhere
  * 
- * Removes WordPress shortlinks from all output locations:
+ * Removes WP shortlinks from all output locations:
  * - HTML <head> section
  * - HTTP Link headers
  * - get_shortlink() function calls

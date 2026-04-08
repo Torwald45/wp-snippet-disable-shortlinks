@@ -1,12 +1,12 @@
-# WP Snippet: Disable WordPress Shortlinks Everywhere
+# WP Snippet: Disable WP Shortlinks Everywhere
 
-Completely removes WordPress shortlinks from all output locations while preserving other HTTP Link headers.
+Completely removes WP shortlinks from all output locations while preserving other HTTP Link headers.
 
 ## Features
 
 - **Removes `<link rel="shortlink">` from HTML head** - Cleans up unnecessary meta tags
 - **Removes HTTP `Link:` header with shortlink** - Eliminates shortlink from server response headers
-- **Disables `get_shortlink()` and `pre_get_shortlink` functions** - Prevents shortlink generation in WordPress API
+- **Disables `get_shortlink()` and `pre_get_shortlink` functions** - Prevents shortlink generation in WP API
 - **Smart filtering** - Preserves other Link headers like preload, DNS-prefetch, or preconnect
 - **Zero configuration** - Works immediately after installation
 - **Lightweight** - No database queries, no settings panel, pure PHP filters
@@ -14,10 +14,10 @@ Completely removes WordPress shortlinks from all output locations while preservi
 
 ## Why Disable Shortlinks?
 
-WordPress shortlinks (e.g., `?p=123`) are enabled by default but rarely used. They add:
+WP shortlinks (e.g., `?p=123`) are enabled by default but rarely used. They add:
 - Unnecessary HTML meta tags
 - Extra HTTP headers
-- **Exposed endpoint** - WordPress exposes shortlink functionality to the world (unlike static generators like Astro)
+- **Exposed endpoint** - WP exposes shortlink functionality to the world (unlike static generators like Astro)
 - Additional attack surface
 - Bloat in your site's output
 
@@ -28,7 +28,7 @@ Removing shortlinks:
 - Simplifies your site's URL structure
 ## Requirements
 
-- WordPress 5.0 or higher
+- WP 5.0 or higher
 - PHP 7.4 or higher
 
 ## Installation
@@ -81,7 +81,7 @@ curl -I https://example.com/sample-page/
 
 ## Technical Details
 
-### WordPress Hooks Used
+### WP Hooks Used
 - `init` (priority 0) - Removes shortlink actions early
 - `pre_get_shortlink` (priority 999) - Prevents shortlink generation
 - `get_shortlink` (priority 999) - Returns empty string
@@ -101,12 +101,12 @@ The snippet uses intelligent filtering on `wp_headers` to:
 ## Compatibility
 
 Tested with:
-- WordPress 5.0 - 6.7+
+- WP 5.0 - 6.7+
 - PHP 7.4 - 8.3
 - Classic themes and block themes
 
 **Known to work with:**
-- Standard WordPress installations
+- Standard WP installations
 - Multisite networks
 - Custom post types
 
